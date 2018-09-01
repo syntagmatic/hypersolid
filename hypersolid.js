@@ -242,10 +242,13 @@
           context.moveTo(x[0], y[0]);
           context.lineTo(x[1], y[1]);
           context.closePath();
+          /*
           var gradient = context.createLinearGradient(x[0], y[0], x[1], y[1]); // Distance fade effect
           gradient.addColorStop(0, self.color(x[0], y[0], z[0], w[0]));
           gradient.addColorStop(1, self.color(x[1], y[1], z[1], w[1]));
           context.strokeStyle = gradient;
+          */
+          context.strokeStyle = self.color(x[1], y[1], z[1], w[1]);
           context.stroke();
         }
       }
