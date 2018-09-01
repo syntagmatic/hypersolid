@@ -202,6 +202,10 @@
     var clicked = false;
     var startCoords;
 
+    self.color = function(x,y,z,w) {
+      return 'rgba(' + w + ',100,' + (255-Math.round(w/2)) +', ' + z + ')';
+    };
+
     self.draw = function() {
       var vertices = shape.getVertices();
       var edges = shape.getEdges();
@@ -214,16 +218,16 @@
           adjusted[i] = {
             x: Math.floor(canvas.width / 2 + (0.90 + zratio * 0.30) * bound * (vertices[i].x / scale)) + 0.5,
             y: Math.floor(canvas.height / 2 - (0.90 + zratio * 0.30) * bound * (vertices[i].y / scale)) + 0.5,
-            z: 0.50 + 0.40 * zratio,
-            w: 121 + Math.floor(134 * vertices[i].w / scale)
+            z: 0.50 + 0.48 * zratio,
+            w: 120 + Math.floor(135 * vertices[i].w / scale)
           };
         }
         else {
           adjusted[i] = {
             x: Math.floor(canvas.width / 2 + bound * (vertices[i].x / scale)) + 0.5,
             y: Math.floor(canvas.height / 2 - bound * (vertices[i].y / scale)) + 0.5,
-            z: 0.50 + 0.40 * vertices[i].z / scale,
-            w: 121 + Math.floor(134 * vertices[i].w / scale)
+            z: 0.50 + 0.48 * vertices[i].z / scale,
+            w: 120 + Math.floor(135 * vertices[i].w / scale)
           };
         }
       }
@@ -239,8 +243,8 @@
           context.lineTo(x[1], y[1]);
           context.closePath();
           var gradient = context.createLinearGradient(x[0], y[0], x[1], y[1]); // Distance fade effect
-          gradient.addColorStop(0, 'rgba(' + w[0] + ',94,' + (125-Math.round(w[0]/2)) +', ' + z[0] + ')');
-          gradient.addColorStop(1, 'rgba(' + w[1] + ',94,' + (125-Math.round(w[0]/2)) +', ' + z[1] + ')');
+          gradient.addColorStop(0, self.color(x[0], y[0], z[0], w[0]));
+          gradient.addColorStop(1, self.color(x[1], y[1], z[1], w[1]));
           context.strokeStyle = gradient;
           context.stroke();
         }
